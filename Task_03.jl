@@ -2,15 +2,15 @@
 #РЕЗУЛЬТАТ: Робот - в исходном положении, и все клетки поля промакированы
 
 function Task_03(r::Robot)
-    horizont=0
-    vertical=0
+    vverh = 0
+    vlevo = 0
     for side in (Nord,West)
         while !isborder(r,side)
             move!(r,side)
             if side==West
-                horizont+=1
+                vlevo += 1
             elseif side==Nord
-                vertical+=1
+                vverh += 1
             end
         end 
     end
@@ -24,15 +24,15 @@ function Task_03(r::Robot)
     end
     putmarker!(r)
     go(r)
-    i=0
-    while i<horizont
+    k = 0
+    while k < vlevo
         move!(r,Ost)
-        i+=1
+        k +=1
     end
-    i=0
-    while i<vertical
+    k = 0
+    while k < vverh
         move!(r,Sud)
-        i+=1
+        k +=1
     end
 end
  
@@ -61,3 +61,5 @@ end
         putmarker!(r)
         move!(r,Sud)
     end
+
+Task_03(r)
