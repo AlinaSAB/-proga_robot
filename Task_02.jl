@@ -3,23 +3,22 @@
 
 include("roblib.jl")
 
-function idti!(x::Robot, side::HorizonSide)
-    while !isborder(x, side)
-        move!(x, side)
-        putmarker!(x)
+function po_perimetery!(r::Robot)
+    koord = []
+    go_to_corner!(r, koord, West, Sud)
+    for stor in [Nord,Ost, Sud, West]
+        idti!(r, stor)
     end
+    return_back!(r, koord)
 end
 
-
-function po_perimetery!(rob::Robot)
-    arr = []
-    go_to_corner!(rob, arr, West, Sud)
-
-    for s in [Nord,Ost, Sud, West]
-        idti!(rob, s)
+function idti!(r::Robot, side::HorizonSide)
+    while !isborder(r, side)
+        move!(r, side)
+        putmarker!(r)
     end
-
-    return_back!(rob, arr)
 end
 
 po_perimetery!(r)
+
+
