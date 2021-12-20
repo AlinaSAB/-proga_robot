@@ -2,19 +2,17 @@
 #РЕЗУЛЬТАТ: Робот - в исходном положении и в углах поля стоят маркеры
 include("roblib.jl")
 
-function stavit_corner!(x::Robot)
+function post_mark_corner!(r::Robot)
+    koord = []
+    go_to_corner!(r, koord, West, Sud)
+    stavit_corner!(r)
+    return_back!(r, koord)
+end
+
+function stavit_corner!(r::Robot)
     for side in (Nord, Ost, Sud, West)
-        moves!(x, side)
-        putmarker!(x)
+        moves!(r, side)
+        putmarker!(r)
     end
 end
-
-
-function post_mark_corner!(rob::Robot)
-    arr = []
-    go_to_corner!(rob, arr, West, Sud)
-    stavit_corner!(rob)
-    return_back!(rob, arr)
-end
-
 post_mark_corner!(r)
